@@ -1,3 +1,4 @@
 phpunit.xml
 .idea
 composer.lock
+vendor

@@ -16,7 +16,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SignatureTest\\": "test"
+            "SignatureTest\\": "test/unit",
+            "SignatureTestFixture\\": "test/fixture"
         }
     },
     "minimum-stability": "dev",
