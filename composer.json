@@ -1,0 +1,24 @@
+{
+    "name": "roave/signature",
+    "description": "Sign and verify stuff",
+    "license": "MIT",
+    "require": {
+        "php": "^7.0|^7.1"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^1.12",
+        "phpunit/phpunit": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Signature\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SignatureTest\\": "test"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
