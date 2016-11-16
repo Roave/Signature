@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace unit\src\Hasher;
+namespace SignatureTest\Hasher;
 
 use Signature\Hasher\Md5Hasher;
 
