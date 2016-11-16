@@ -8,7 +8,7 @@ use ReflectionClass;
 use Signature\Encoder\EncoderInterface;
 use Signature\Hasher\HasherInterface;
 
-final class ClassChecker implements CheckerInterface
+final class Checker implements CheckerInterface
 {
     /**
      * @var EncoderInterface
