@@ -9,14 +9,14 @@ use BetterReflection\Reflection\ReflectionClass;
 class ClassChecker
 {
     /**
-     * @var ClassSignerInterface
+     * @var SignerInterface
      */
     private $signer;
 
     /**
-     * @param ClassSignerInterface $signatureGenerator
+     * @param SignerInterface $signatureGenerator
      */
-    public function __construct(ClassSignerInterface $signatureGenerator)
+    public function __construct(SignerInterface $signatureGenerator)
     {
         $this->signer = $signatureGenerator;
     }

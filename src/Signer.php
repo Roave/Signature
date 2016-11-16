@@ -9,7 +9,7 @@ use Signature\Hasher\HasherInterface;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\PropertyGenerator;
 
-class ClassSigner implements ClassSignerInterface
+class Signer implements SignerInterface
 {
     /**
      * @var HasherInterface

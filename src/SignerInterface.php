@@ -8,7 +8,7 @@ use Signature\Encoder\EncoderInterface;
 use Signature\Hasher\HasherInterface;
 use Zend\Code\Generator\ClassGenerator;
 
-interface ClassSignerInterface
+interface SignerInterface
 {
     public function __construct(EncoderInterface $encoder, HasherInterface $hasher);
 
