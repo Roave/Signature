@@ -12,7 +12,7 @@ use Signature\Hasher\HasherInterface;
  * @author Jefersson Nathan <malukenho@phpse.net>
  * @license MIT
  */
-final class Checker implements CheckerInterface
+final class FileContentChecker implements CheckerInterface
 {
     /**
      * @var EncoderInterface
@@ -35,13 +35,11 @@ final class Checker implements CheckerInterface
 
     /**
      * {@inheritDoc}
-     *
-     * @throws \RuntimeException
      */
     public function check(ReflectionClass $class, array $parameters)
     {
-        $propertyName      = 'verify' . $this->hasher->hash($parameters);
-        $signature         = $this->encoder->encode($parameters);
+        $propertyName      = 'fileContentSignature' . $this->hasher->hash($class->getName());
+        $signature         = $this->encoder->encode(file_get_contents($class->getFileName()));
         $defaultProperties = $class->getDefaultProperties();
 
         if (! isset($defaultProperties[$propertyName])) {

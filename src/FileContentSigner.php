@@ -13,17 +13,17 @@ use Zend\Code\Generator\PropertyGenerator;
  * @author Jefersson Nathan <malukenho@phpse.net>
  * @license MIT
  */
-final class Signer implements SignerInterface
+final class FileContentSigner implements SignerInterface
 {
-    /**
-     * @var HasherInterface
-     */
-    private $hasher;
-
     /**
      * @var EncoderInterface
      */
     private $encoder;
+
+    /**
+     * @var HasherInterface
+     */
+    private $hasher;
 
     /**
      * {@inheritDoc}
@@ -34,16 +34,11 @@ final class Signer implements SignerInterface
         $this->hasher  = $hasher;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @throws \Zend\Code\Exception\InvalidArgumentException
-     */
-    public function sign(ClassGenerator $classGenerator, array $parameters) : ClassGenerator
+    public function sign(ClassGenerator $classGenerator, array $parameters): ClassGenerator
     {
         $classGenerator->addPropertyFromGenerator(new PropertyGenerator(
-            'verify' . $this->hasher->hash($parameters),
-            $this->encoder->encode($parameters),
+            'fileContentSignature' . $this->hasher->hash($classGenerator->getName()),
+            $this->encoder->encode($classGenerator->getSourceContent()),
             PropertyGenerator::FLAG_STATIC | PropertyGenerator::FLAG_PRIVATE
         ));
 
