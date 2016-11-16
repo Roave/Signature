@@ -4,21 +4,26 @@ declare(strict_types=1);
 
 namespace Signature;
 
-use BetterReflection\Reflection\ReflectionClass;
+use ReflectionClass;
+use Signature\Encoder\EncoderInterface;
+use Signature\Hasher\HasherInterface;
 
-class ClassChecker
+final class ClassChecker implements CheckerInterface
 {
     /**
-     * @var SignerInterface
+     * @var EncoderInterface
      */
-    private $signer;
+    private $encoder;
 
     /**
-     * @param SignerInterface $signatureGenerator
+     * @var HasherInterface
      */
-    public function __construct(SignerInterface $signatureGenerator)
+    private $hasher;
+
+    public function __construct(EncoderInterface $encoder, HasherInterface $hasher)
     {
-        $this->signer = $signatureGenerator;
+        $this->encoder = $encoder;
+        $this->hasher  = $hasher;
     }
 
     /**
@@ -26,10 +31,10 @@ class ClassChecker
      *
      * @throws \RuntimeException
      */
-    public function checkSignature(ReflectionClass $class, array $parameters)
+    public function check(ReflectionClass $class, array $parameters)
     {
-        $propertyName      = 'verify' . $this->signer->generateKey($parameters);
-        $signature         = $this->signer->encode($parameters);
+        $propertyName      = 'verify' . $this->hasher->hash($parameters);
+        $signature         = $this->encoder->encode($parameters);
         $defaultProperties = $class->getDefaultProperties();
 
         if (! isset($defaultProperties[$propertyName])) {
