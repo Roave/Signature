@@ -9,10 +9,6 @@ use Signature\Hasher\HasherInterface;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\PropertyGenerator;
 
-/**
- * @author Jefersson Nathan <malukenho@phpse.net>
- * @license MIT
- */
 final class Signer implements SignerInterface
 {
     /**

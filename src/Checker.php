@@ -8,10 +8,6 @@ use ReflectionClass;
 use Signature\Encoder\EncoderInterface;
 use Signature\Hasher\HasherInterface;
 
-/**
- * @author Jefersson Nathan <malukenho@phpse.net>
- * @license MIT
- */
 final class Checker implements CheckerInterface
 {
     /**

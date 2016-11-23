@@ -7,12 +7,6 @@ namespace SignatureTest\Hasher;
 use Signature\Hasher\Md5Hasher;
 
 /**
- * Tests for {@see Signature\Hasher\Md5Hasher}.
- *
- * @group   Unitary
- * @author  Jefersson Nathan <malukenho@phpse.net>
- * @license MIT
- *
  * @covers \Signature\Hasher\Md5Hasher
  */
 final class Md5HasherTest extends \PHPUnit_Framework_TestCase

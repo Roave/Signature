@@ -11,12 +11,6 @@ use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\PropertyGenerator;
 
 /**
- * Tests for {@see Signature\Signer}.
- *
- * @group   Unitary
- * @author  Jefersson Nathan <malukenho@phpse.net>
- * @license MIT
- *
  * @covers \Signature\Signer
  */
 final class SignerTest extends \PHPUnit_Framework_TestCase

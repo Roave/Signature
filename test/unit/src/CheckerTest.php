@@ -12,12 +12,6 @@ use Signature\Hasher\Md5Hasher;
 use SignatureTestFixture\ClassWithValidSignerProperty;
 
 /**
- * Tests for {@see Signature\Checker}.
- *
- * @group   Unitary
- * @author  Jefersson Nathan <malukenho@phpse.net>
- * @license MIT
- *
  * @covers \Signature\Checker
  */
 final class CheckerTest extends \PHPUnit_Framework_TestCase

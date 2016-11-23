@@ -7,12 +7,6 @@ namespace SignatureTest\Encoder;
 use Signature\Encoder\Base64Encoder;
 
 /**
- * Tests for {@see Signature\Encoder\Base64Encoder}.
- *
- * @group   Unitary
- * @author  Jefersson Nathan <malukenho@phpse.net>
- * @license MIT
- *
  * @covers \Signature\Encoder\Base64Encoder
  */
 final class Base64EncoderTest extends \PHPUnit_Framework_TestCase
