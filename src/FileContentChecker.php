@@ -33,11 +33,21 @@ final class FileContentChecker implements CheckerInterface
 
     /**
      * {@inheritDoc}
+     *
+     * @throws \RuntimeException
      */
     public function check(ReflectionClass $class, array $parameters)
     {
-        $propertyName      = 'fileContentSignature' . $this->hasher->hash($class->getName());
-        $signature         = $this->encoder->encode(file_get_contents($class->getFileName()));
+        $propertyName = 'fileContentSignature' . $this->hasher->hash([$class->getName()]);
+
+        if (! $class->getFileName()) {
+            // @todo specific exception
+            throw new \RuntimeException('File could not be located');
+        }
+
+        // @todo missing check/exception if file is readable
+
+        $signature         = $this->encoder->encode([file_get_contents($class->getFileName())]);
         $defaultProperties = $class->getDefaultProperties();
 
         if (! isset($defaultProperties[$propertyName])) {
