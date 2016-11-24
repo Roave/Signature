@@ -7,6 +7,7 @@ namespace Signature;
 use ReflectionClass;
 use Signature\Encoder\EncoderInterface;
 use Signature\Exception\InvalidSignatureException;
+use Signature\Exception\SignatureDoesNotMatchException;
 use Signature\Hasher\HasherInterface;
 
 final class Checker implements CheckerInterface
@@ -44,7 +45,7 @@ final class Checker implements CheckerInterface
         }
 
         if ($defaultProperties[$propertyName] !== $signature) {
-            throw new \RuntimeException('Signature doesn\'t match');
+            throw new SignatureDoesNotMatchException();
         }
     }
 }

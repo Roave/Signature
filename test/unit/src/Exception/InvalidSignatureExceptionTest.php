@@ -6,6 +6,9 @@ namespace SignatureTest\Exception;
 
 use Signature\Exception\InvalidSignatureException;
 
+/**
+ * @covers \Signature\Exception\InvalidSignatureException
+ */
 final class InvalidSignatureExceptionTest extends \PHPUnit_Framework_TestCase
 {
     public function testInvalidSignatureException()
