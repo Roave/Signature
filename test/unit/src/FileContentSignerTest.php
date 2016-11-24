@@ -13,7 +13,7 @@ use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\PropertyGenerator;
 
 /**
- * @covers \Signature\FileContentSigner
+ * @coversNothing
  */
 final class FileContentSignerTest extends PHPUnit_Framework_TestCase
 {
