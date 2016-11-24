@@ -6,6 +6,7 @@ namespace Signature;
 
 use ReflectionClass;
 use Signature\Encoder\EncoderInterface;
+use Signature\Exception\InvalidSignatureException;
 use Signature\Hasher\HasherInterface;
 
 final class Checker implements CheckerInterface
@@ -31,8 +32,6 @@ final class Checker implements CheckerInterface
 
     /**
      * {@inheritDoc}
-     *
-     * @throws \RuntimeException
      */
     public function check(ReflectionClass $class, array $parameters)
     {
@@ -41,7 +40,7 @@ final class Checker implements CheckerInterface
         $defaultProperties = $class->getDefaultProperties();
 
         if (! isset($defaultProperties[$propertyName])) {
-            throw new \RuntimeException('Invalid Signature');
+            throw new InvalidSignatureException();
         }
 
         if ($defaultProperties[$propertyName] !== $signature) {

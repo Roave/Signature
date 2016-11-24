@@ -6,6 +6,7 @@ namespace Signature;
 
 use ReflectionClass;
 use Signature\Encoder\EncoderInterface;
+use Signature\Exception\InvalidSignatureException;
 use Signature\Hasher\HasherInterface;
 
 final class FileContentChecker implements CheckerInterface
@@ -39,7 +40,7 @@ final class FileContentChecker implements CheckerInterface
         $defaultProperties = $class->getDefaultProperties();
 
         if (! isset($defaultProperties[$propertyName])) {
-            throw new \RuntimeException('Invalid Signature');
+            throw new InvalidSignatureException();
         }
 
         if ($defaultProperties[$propertyName] !== $signature) {
