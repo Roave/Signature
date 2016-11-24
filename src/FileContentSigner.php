@@ -33,8 +33,8 @@ final class FileContentSigner implements SignerInterface
     public function sign(ClassGenerator $classGenerator, array $parameters): ClassGenerator
     {
         $classGenerator->addPropertyFromGenerator(new PropertyGenerator(
-            'fileContentSignature' . $this->hasher->hash($classGenerator->getName()),
-            $this->encoder->encode($classGenerator->getSourceContent()),
+            'fileContentSignature' . $this->hasher->hash([$classGenerator->getName()]),
+            $this->encoder->encode([$classGenerator->getSourceContent()]),
             PropertyGenerator::FLAG_STATIC | PropertyGenerator::FLAG_PRIVATE
         ));
 
