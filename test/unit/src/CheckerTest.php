@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace SignatureTest;
 
+use ReflectionClass;
 use Signature\Checker;
-use Signature\Encoder\Base64Encoder;
 use Signature\Encoder\EncoderInterface;
+use Signature\Exception\InvalidSignatureException;
+use Signature\Exception\SignatureDoesNotMatchException;
 use Signature\Hasher\HasherInterface;
-use Signature\Hasher\Md5Hasher;
 use SignatureTestFixture\ClassWithValidSignerProperty;
 
 /**
@@ -16,25 +17,66 @@ use SignatureTestFixture\ClassWithValidSignerProperty;
  */
 final class CheckerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testCheckInvalidSignature()
+    /**
+     * @var EncoderInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $encoder;
+
+    /**
+     * @var HasherInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $hasher;
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function setUp()
     {
-        $checker = new Checker(new Base64Encoder(), new Md5Hasher());
+        parent::setUp();
 
-        $this->expectException(\RuntimeException::class);
+        $this->encoder = $this->createMock(EncoderInterface::class);
+        $this->hasher  = $this->createMock(HasherInterface::class);
+    }
 
-        $checker->check(new \ReflectionClass(\stdClass::class), []);
+    public function testInvalidSignatureException()
+    {
+        $checker = new Checker($this->encoder, $this->hasher);
+
+        /* @var $reflection \ReflectionClass|\PHPUnit_Framework_MockObject_MockObject */
+        $reflection = $this->createMock(ReflectionClass::class);
+
+        $this->expectException(InvalidSignatureException::class);
+
+        $checker->check($reflection, []);
+    }
+
+    public function testSignatureDoesNotMatchException()
+    {
+        $classFilePath = __DIR__ . '/../../fixture/UserClass.php';
+
+        self::assertFileExists($classFilePath);
+
+        $this->encoder->expects(self::once())->method('encode')->willReturn('123abc');
+
+        $checker = new Checker($this->encoder, $this->hasher);
+
+        /* @var $reflection \ReflectionClass|\PHPUnit_Framework_MockObject_MockObject */
+        $reflection = $this->createMock(ReflectionClass::class);
+
+        $reflection->expects(self::once())->method('getDefaultProperties')->willReturn(['verify' => '111']);
+
+        $this->expectException(SignatureDoesNotMatchException::class);
+
+        $checker->check($reflection, []);
     }
 
     public function testCheck()
     {
-        $encoder = $this->createMock(EncoderInterface::class);
-        $hasher  = $this->createMock(HasherInterface::class);
+        $this->encoder->expects(self::exactly(1))->method('encode')->with([])->willReturn('YTowOnt9');
+        $this->hasher->expects(self::exactly(1))->method('hash')->with([])->willReturn('40cd750bba9870f18aada2478b24840a');
 
-        $encoder->expects(self::exactly(1))->method('encode')->with([])->willReturn('YTowOnt9');
-        $hasher->expects(self::exactly(1))->method('hash')->with([])->willReturn('40cd750bba9870f18aada2478b24840a');
+        $checker = new Checker($this->encoder, $this->hasher);
 
-        $checker = new Checker($encoder, $hasher);
-
-        $checker->check(new \ReflectionClass(ClassWithValidSignerProperty::class), []);
+        $checker->check(new ReflectionClass(ClassWithValidSignerProperty::class), []);
     }
 }
