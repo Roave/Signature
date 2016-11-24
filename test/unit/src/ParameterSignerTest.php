@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace SignatureTest;
 
-use Signature\Signer;
+use Signature\ParameterSigner;
 use Signature\Encoder\Base64Encoder;
 use Signature\Hasher\Md5Hasher;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\PropertyGenerator;
 
 /**
- * @covers \Signature\Signer
+ * @covers \Signature\ParameterSigner
  */
-final class SignerTest extends \PHPUnit_Framework_TestCase
+final class ParameterSignerTest extends \PHPUnit_Framework_TestCase
 {
     public function testItShouldSignAClass()
     {
-        $signer         = new Signer(new Base64Encoder(), new Md5Hasher());
+        $signer         = new ParameterSigner(new Base64Encoder(), new Md5Hasher());
         $classGenerator = $signer->sign(new ClassGenerator('DummyClass'), ['foo']);
         $properties     = $classGenerator->getProperties();
 
