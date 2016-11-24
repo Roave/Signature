@@ -10,7 +10,7 @@ use Signature\Exception\InvalidSignatureException;
 use Signature\Exception\SignatureDoesNotMatchException;
 use Signature\Hasher\HasherInterface;
 
-final class Checker implements CheckerInterface
+final class ParameterChecker implements CheckerInterface
 {
     /**
      * @var EncoderInterface

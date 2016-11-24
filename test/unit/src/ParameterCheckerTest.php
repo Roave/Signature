@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SignatureTest;
 
 use ReflectionClass;
-use Signature\Checker;
+use Signature\ParameterChecker;
 use Signature\Encoder\EncoderInterface;
 use Signature\Exception\InvalidSignatureException;
 use Signature\Exception\SignatureDoesNotMatchException;
@@ -13,9 +13,9 @@ use Signature\Hasher\HasherInterface;
 use SignatureTestFixture\ClassWithValidSignerProperty;
 
 /**
- * @covers \Signature\Checker
+ * @covers \Signature\ParameterChecker
  */
-final class CheckerTest extends \PHPUnit_Framework_TestCase
+final class ParameterCheckerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var EncoderInterface|\PHPUnit_Framework_MockObject_MockObject
@@ -40,7 +40,7 @@ final class CheckerTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidSignatureException()
     {
-        $checker = new Checker($this->encoder, $this->hasher);
+        $checker = new ParameterChecker($this->encoder, $this->hasher);
 
         /* @var $reflection \ReflectionClass|\PHPUnit_Framework_MockObject_MockObject */
         $reflection = $this->createMock(ReflectionClass::class);
@@ -58,7 +58,7 @@ final class CheckerTest extends \PHPUnit_Framework_TestCase
 
         $this->encoder->expects(self::once())->method('encode')->willReturn('123abc');
 
-        $checker = new Checker($this->encoder, $this->hasher);
+        $checker = new ParameterChecker($this->encoder, $this->hasher);
 
         /* @var $reflection \ReflectionClass|\PHPUnit_Framework_MockObject_MockObject */
         $reflection = $this->createMock(ReflectionClass::class);
@@ -75,7 +75,7 @@ final class CheckerTest extends \PHPUnit_Framework_TestCase
         $this->encoder->expects(self::exactly(1))->method('encode')->with([])->willReturn('YTowOnt9');
         $this->hasher->expects(self::exactly(1))->method('hash')->with([])->willReturn('40cd750bba9870f18aada2478b24840a');
 
-        $checker = new Checker($this->encoder, $this->hasher);
+        $checker = new ParameterChecker($this->encoder, $this->hasher);
 
         $checker->check(new ReflectionClass(ClassWithValidSignerProperty::class), []);
     }
