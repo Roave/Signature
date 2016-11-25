@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Signature;
 
-use ReflectionClass;
 use Signature\Encoder\EncoderInterface;
 use Signature\Exception\SignatureException;
 use Signature\Hasher\HasherInterface;
@@ -32,38 +31,33 @@ final class FileContentChecker implements CheckerInterface
 
     /**
      * {@inheritDoc}
-     *
-     * @throws \RuntimeException
      */
-    public function check(ReflectionClass $class, array $parameters)
+    public function check(string $phpCode)
     {
-        // @todo missing check/exception if file is readable
-        if (! $class->getFileName()) {
-            // @todo specific exception
-            throw new \RuntimeException('File could not be located');
-        }
-
-        // @todo refactor the extraction of the signature
-        $fileContent = file_get_contents($class->getFileName());
-
-        if (! preg_match('{Roave/Signature: ([a-zA-Z0-9\/=]+)}', $fileContent, $matches)) {
+        if (! preg_match('{Roave/Signature:\s+([a-zA-Z0-9\/=]+)}', $phpCode, $matches)) {
             throw SignatureException::fromInvalidSignature();
         }
 
         // @todo extract this logic for get rid of signature
-        $codeWithoutSignature = implode(
-            array_filter(
-                array_map(
-                    function (string $line): ?string {
-                        if (! preg_match('{Roave/Signature: (\w)}', $line, $matches)) {
-                            return $line;
-                        }
+        $codeWithoutSignature = array_reduce(
+            explode("\n", $phpCode),
+            function (?string $carry, ?string $currentLine): string {
 
-                        return null;
-                    },
-                    file($class->getFileName())
-                )
-            )
+                // if current line is the signature line, we just ignore it
+                if (preg_match('{Roave/Signature: (\w)}', $currentLine)) {
+                    return $carry;
+                }
+
+                if (null === $carry) {
+                    return $currentLine;
+                }
+
+                if (null !== $currentLine) {
+                    return $carry . "\n" . $currentLine;
+                }
+
+                return $carry;
+            }
         );
 
         $signature = $this->encoder->encode([$codeWithoutSignature]);
