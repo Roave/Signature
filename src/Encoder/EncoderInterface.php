@@ -6,5 +6,6 @@ namespace Roave\Signature\Encoder;
 
 interface EncoderInterface
 {
-    public function encode(string $parameters): string;
+    public function encode(string $codeWithoutSignature): string;
+    public function verify(string $codeWithoutSignature, string $signature): bool;
 }

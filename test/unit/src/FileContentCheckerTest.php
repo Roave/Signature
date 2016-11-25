@@ -54,12 +54,17 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 
         self::assertFileExists($classFilePath);
 
-        $this->encoder->expects(self::once())->method('encode')->with(
+        $expectedSignature = 'YToxOntpOjA7czoxNDE6Ijw/cGhwCgpuYW1lc3BhY2UgU2lnbmF0dXJlVGVzdEZpeHR1cmU7' .
+            'CgpjbGFzcyBVc2VyQ2xhc3NTaWduZWRCeUZpbGVDb250ZW50CnsKICAgIHB1YmxpYyAkbmFtZTsKCiAgICBwcm90ZW' .
+            'N0ZWQgJHN1cm5hbWU7CgogICAgcHJpdmF0ZSAkYWdlOwp9CiI7fQ==';
+
+        $this->encoder->expects(self::once())->method('verify')->with(
             str_replace(
-                '/** Roave/Signature: YToxOntpOjA7czoxNDE6Ijw/cGhwCgpuYW1lc3BhY2UgU2lnbmF0dXJlVGVzdEZpeHR1cmU7CgpjbGFzcyBVc2VyQ2xhc3NTaWduZWRCeUZpbGVDb250ZW50CnsKICAgIHB1YmxpYyAkbmFtZTsKCiAgICBwcm90ZWN0ZWQgJHN1cm5hbWU7CgogICAgcHJpdmF0ZSAkYWdlOwp9CiI7fQ== */' . "\n",
+                '/** Roave/Signature: ' . $expectedSignature . ' */' . "\n",
                 '',
                 file_get_contents($classFilePath)
-            )
+            ),
+            $expectedSignature
         );
 
         /* @var $reflection \ReflectionClass|\PHPUnit_Framework_MockObject_MockObject */

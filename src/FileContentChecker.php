@@ -59,8 +59,6 @@ final class FileContentChecker implements CheckerInterface
             }
         );
 
-        $signature = $this->encoder->encode($codeWithoutSignature);
-
-        return $matches[1] === $signature;
+        return $this->encoder->verify($codeWithoutSignature, $matches[1]);
     }
 }
