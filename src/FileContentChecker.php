@@ -7,7 +7,6 @@ namespace Signature;
 use ReflectionClass;
 use Signature\Encoder\EncoderInterface;
 use Signature\Exception\SignatureException;
-use Signature\Exception\SignatureDoesNotMatchException;
 use Signature\Hasher\HasherInterface;
 
 final class FileContentChecker implements CheckerInterface

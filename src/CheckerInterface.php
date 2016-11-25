@@ -17,7 +17,6 @@ interface CheckerInterface
      * @param array           $parameters
      *
      * @throws \Signature\Exception\SignatureException
-     * @throws \Signature\Exception\SignatureDoesNotMatchException
      *
      * @return void
      */
