@@ -39,7 +39,7 @@ final class FileContentChecker implements CheckerInterface
 
         // @todo extract this logic for get rid of signature
         $codeWithoutSignature = array_reduce(
-            explode("\n", $phpCode),
+            explode(PHP_EOL, $phpCode),
             function (?string $carry, ?string $currentLine): string {
 
                 // if current line is the signature line, we just ignore it
