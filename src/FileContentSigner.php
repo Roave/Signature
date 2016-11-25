@@ -30,14 +30,8 @@ final class FileContentSigner implements SignerInterface
         $this->hasher  = $hasher;
     }
 
-    public function sign(ClassGenerator $classGenerator, array $parameters): ClassGenerator
+    public function sign(string $phpCode): string
     {
-        $classGenerator->addPropertyFromGenerator(new PropertyGenerator(
-            'fileContentSignature' . $this->hasher->hash([$classGenerator->getName()]),
-            $this->encoder->encode([$classGenerator->getSourceContent()]),
-            PropertyGenerator::FLAG_STATIC | PropertyGenerator::FLAG_PRIVATE
-        ));
-
-        return $classGenerator;
+        return 'Roave/Signature: ' . $this->encoder->encode([$phpCode]);
     }
 }
