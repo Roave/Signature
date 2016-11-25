@@ -67,8 +67,6 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
             $expectedSignature
         );
 
-        /* @var $reflection \ReflectionClass|\PHPUnit_Framework_MockObject_MockObject */
-
         $checker = new FileContentChecker($this->encoder, $this->hasher);
 
         self::assertFalse($checker->check(file_get_contents($classFilePath)));
