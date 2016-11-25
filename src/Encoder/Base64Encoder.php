@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Signature\Encoder;
+namespace Roave\Signature\Encoder;
 
 final class Base64Encoder implements EncoderInterface
 {

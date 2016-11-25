@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Signature\Hasher;
+namespace Roave\Signature\Hasher;
 
 final class Md5Hasher implements HasherInterface
 {

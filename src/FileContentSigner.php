@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Signature;
+namespace Roave\Signature;
 
-use Signature\Encoder\EncoderInterface;
-use Signature\Hasher\HasherInterface;
-use Zend\Code\Generator\ClassGenerator;
-use Zend\Code\Generator\PropertyGenerator;
+use Roave\Signature\Encoder\EncoderInterface;
+use Roave\Signature\Hasher\HasherInterface;
 
 final class FileContentSigner implements SignerInterface
 {

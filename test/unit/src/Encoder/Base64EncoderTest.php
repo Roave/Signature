@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SignatureTest\Encoder;
+namespace Roave\SignatureTest\Encoder;
 
-use Signature\Encoder\Base64Encoder;
+use Roave\Signature\Encoder\Base64Encoder;
 
 /**
- * @covers \Signature\Encoder\Base64Encoder
+ * @covers \Roave\Signature\Encoder\Base64Encoder
  */
 final class Base64EncoderTest extends \PHPUnit_Framework_TestCase
 {

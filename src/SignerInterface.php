@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Signature;
+namespace Roave\Signature;
 
-use Signature\Encoder\EncoderInterface;
-use Signature\Hasher\HasherInterface;
+use Roave\Signature\Encoder\EncoderInterface;
+use Roave\Signature\Hasher\HasherInterface;
 
 interface SignerInterface
 {

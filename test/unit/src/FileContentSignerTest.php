@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace SignatureTest;
+namespace Roave\SignatureTest;
 
 use PHPUnit_Framework_TestCase;
-use Signature\Encoder\Base64Encoder;
-use Signature\FileContentSigner;
-use Signature\Hasher\Md5Hasher;
+use Roave\Signature\Encoder\Base64Encoder;
+use Roave\Signature\FileContentSigner;
+use Roave\Signature\Hasher\Md5Hasher;
 
 /**
- * @covers \Signature\FileContentSigner
+ * @covers \Roave\Signature\FileContentSigner
  */
 final class FileContentSignerTest extends PHPUnit_Framework_TestCase
 {

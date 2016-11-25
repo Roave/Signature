@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace SignatureTest;
+namespace Roave\SignatureTest;
 
 use PHPUnit_Framework_TestCase;
-use Signature\Encoder\Base64Encoder;
-use Signature\Encoder\EncoderInterface;
-use Signature\FileContentChecker;
-use Signature\Hasher\HasherInterface;
-use Signature\Hasher\Md5Hasher;
+use Roave\Signature\Encoder\Base64Encoder;
+use Roave\Signature\Encoder\EncoderInterface;
+use Roave\Signature\FileContentChecker;
+use Roave\Signature\Hasher\HasherInterface;
+use Roave\Signature\Hasher\Md5Hasher;
 
 /**
- * @covers \Signature\FileContentChecker
+ * @covers \Roave\Signature\FileContentChecker
  */
 final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 {

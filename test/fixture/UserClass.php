@@ -1,6 +1,6 @@
 <?php
 
-namespace SignatureTestFixture;
+namespace Roave\SignatureTestFixture;
 
 class UserClass
 {

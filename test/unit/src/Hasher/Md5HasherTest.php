@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SignatureTest\Hasher;
+namespace Roave\SignatureTest\Hasher;
 
-use Signature\Hasher\Md5Hasher;
+use Roave\Signature\Hasher\Md5Hasher;
 
 /**
- * @covers \Signature\Hasher\Md5Hasher
+ * @covers \Roave\Signature\Hasher\Md5Hasher
  */
 final class Md5HasherTest extends \PHPUnit_Framework_TestCase
 {

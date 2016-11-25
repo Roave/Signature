@@ -11,13 +11,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Signature\\": "src"
+            "Roave\\Signature\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SignatureTest\\": "test/unit",
-            "SignatureTestFixture\\": "test/fixture"
+            "Roave\\SignatureTest\\": "test/unit",
+            "Roave\\SignatureTestFixture\\": "test/fixture"
         }
     },
     "minimum-stability": "dev",
