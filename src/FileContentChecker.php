@@ -52,7 +52,7 @@ final class FileContentChecker implements CheckerInterface
                 }
 
                 if (null !== $currentLine) {
-                    return $carry . "\n" . $currentLine;
+                    return $carry . PHP_EOL . $currentLine;
                 }
 
                 return $carry;
