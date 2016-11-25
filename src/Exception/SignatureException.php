@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Signature\Exception;
 
-final class SignatureException extends RuntimeException
+use RuntimeException;
+
+final class SignatureException extends RuntimeException implements ExceptionInterface
 {
     public static function fromInvalidSignature()
     {
