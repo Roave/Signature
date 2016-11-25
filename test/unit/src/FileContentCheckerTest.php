@@ -8,11 +8,9 @@ use PHPUnit_Framework_TestCase;
 use Signature\Encoder\Base64Encoder;
 use Signature\Encoder\EncoderInterface;
 use Signature\Exception\SignatureException;
-use Signature\Exception\SignatureDoesNotMatchException;
 use Signature\FileContentChecker;
 use Signature\Hasher\HasherInterface;
 use Signature\Hasher\Md5Hasher;
-use SignatureTestFixture\UserClassSignedByFileContent;
 
 /**
  * @covers \Signature\FileContentChecker
@@ -48,7 +46,7 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 
         $checker = new FileContentChecker(new Base64Encoder(), new Md5Hasher());
 
-        $checker->check(new \ReflectionClass(UserClassSignedByFileContent::class), []);
+        $checker->check(file_get_contents($classFilePath));
     }
 
     public function testShouldThrowExceptionInCaseOfInvalidSignature()
@@ -66,16 +64,13 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
         ]);
 
         /* @var $reflection \ReflectionClass|\PHPUnit_Framework_MockObject_MockObject */
-        $reflection = $this->createMock(\ReflectionClass::class);
-
-        $reflection->expects(self::exactly(3))->method('getFileName')->willReturn($classFilePath);
 
         $checker = new FileContentChecker($this->encoder, $this->hasher);
 
         $this->expectException(SignatureException::class);
         $this->expectExceptionMessage('Signature does not match');
 
-        $checker->check($reflection, []);
+        $checker->check(file_get_contents($classFilePath));
     }
 
     public function testShouldThrowExceptionInCaseOfSignatureDoesNotMatch()
@@ -84,24 +79,10 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 
         self::assertFileExists($classFilePath);
 
-        /* @var $reflection \ReflectionClass|\PHPUnit_Framework_MockObject_MockObject */
-        $reflection = $this->createMock(\ReflectionClass::class);
-
-        $reflection->expects(self::exactly(2))->method('getFileName')->willReturn($classFilePath);
-
         $checker = new FileContentChecker($this->encoder, $this->hasher);
 
         $this->expectException(SignatureException::class);
 
-        $checker->check($reflection, []);
-    }
-
-    public function testShouldThrowExceptionInCaseOfFileNotLocated()
-    {
-        $checker = new FileContentChecker($this->encoder, $this->hasher);
-
-        $this->expectException(\RuntimeException::class);
-
-        $checker->check(new \ReflectionClass(\stdClass::class), []);
+        $checker->check(file_get_contents($classFilePath));
     }
 }
