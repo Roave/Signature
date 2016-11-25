@@ -7,7 +7,7 @@ namespace SignatureTest;
 use ReflectionClass;
 use Signature\ParameterChecker;
 use Signature\Encoder\EncoderInterface;
-use Signature\Exception\InvalidSignatureException;
+use Signature\Exception\SignatureException;
 use Signature\Exception\SignatureDoesNotMatchException;
 use Signature\Hasher\HasherInterface;
 use SignatureTestFixture\ClassWithValidSignerProperty;
@@ -45,7 +45,7 @@ final class ParameterCheckerTest extends \PHPUnit_Framework_TestCase
         /* @var $reflection \ReflectionClass|\PHPUnit_Framework_MockObject_MockObject */
         $reflection = $this->createMock(ReflectionClass::class);
 
-        $this->expectException(InvalidSignatureException::class);
+        $this->expectException(SignatureException::class);
 
         $checker->check($reflection, []);
     }

@@ -6,7 +6,7 @@ namespace Signature;
 
 use ReflectionClass;
 use Signature\Encoder\EncoderInterface;
-use Signature\Exception\InvalidSignatureException;
+use Signature\Exception\SignatureException;
 use Signature\Exception\SignatureDoesNotMatchException;
 use Signature\Hasher\HasherInterface;
 
@@ -41,7 +41,7 @@ final class ParameterChecker implements CheckerInterface
         $defaultProperties = $class->getDefaultProperties();
 
         if (! isset($defaultProperties[$propertyName])) {
-            throw new InvalidSignatureException();
+            throw SignatureException::fromInvalidSignature();
         }
 
         if ($defaultProperties[$propertyName] !== $signature) {

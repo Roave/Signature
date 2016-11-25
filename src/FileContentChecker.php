@@ -6,7 +6,7 @@ namespace Signature;
 
 use ReflectionClass;
 use Signature\Encoder\EncoderInterface;
-use Signature\Exception\InvalidSignatureException;
+use Signature\Exception\SignatureException;
 use Signature\Exception\SignatureDoesNotMatchException;
 use Signature\Hasher\HasherInterface;
 
@@ -48,7 +48,7 @@ final class FileContentChecker implements CheckerInterface
         $fileContent = file_get_contents($class->getFileName());
 
         if (! preg_match('{Roave/Signature: ([a-zA-Z0-9\/=]+)}', $fileContent, $matches)) {
-            throw new InvalidSignatureException();
+            throw SignatureException::fromInvalidSignature();
         }
 
         // @todo extract this logic for get rid of signature

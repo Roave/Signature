@@ -7,7 +7,7 @@ namespace SignatureTest;
 use PHPUnit_Framework_TestCase;
 use Signature\Encoder\Base64Encoder;
 use Signature\Encoder\EncoderInterface;
-use Signature\Exception\InvalidSignatureException;
+use Signature\Exception\SignatureException;
 use Signature\Exception\SignatureDoesNotMatchException;
 use Signature\FileContentChecker;
 use Signature\Hasher\HasherInterface;
@@ -90,7 +90,7 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 
         $checker = new FileContentChecker($this->encoder, $this->hasher);
 
-        $this->expectException(InvalidSignatureException::class);
+        $this->expectException(SignatureException::class);
 
         $checker->check($reflection, []);
     }
