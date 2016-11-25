@@ -65,7 +65,8 @@ final class ParameterCheckerTest extends \PHPUnit_Framework_TestCase
 
         $reflection->expects(self::once())->method('getDefaultProperties')->willReturn(['verify' => '111']);
 
-        $this->expectException(SignatureDoesNotMatchException::class);
+        $this->expectException(SignatureException::class);
+        $this->expectExceptionMessage('Signature does not match');
 
         $checker->check($reflection, []);
     }

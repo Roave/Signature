@@ -70,7 +70,7 @@ final class FileContentChecker implements CheckerInterface
         $signature = $this->encoder->encode([$codeWithoutSignature]);
 
         if ($matches[1] !== $signature) {
-            throw new SignatureDoesNotMatchException();
+            throw SignatureException::fromSignatureDoesNotMatch();
         }
     }
 }

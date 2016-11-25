@@ -72,7 +72,8 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 
         $checker = new FileContentChecker($this->encoder, $this->hasher);
 
-        $this->expectException(SignatureDoesNotMatchException::class);
+        $this->expectException(SignatureException::class);
+        $this->expectExceptionMessage('Signature does not match');
 
         $checker->check($reflection, []);
     }

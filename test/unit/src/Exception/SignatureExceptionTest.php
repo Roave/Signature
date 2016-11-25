@@ -22,4 +22,16 @@ final class SignatureExceptionTest extends \PHPUnit_Framework_TestCase
 
         throw $exception;
     }
+
+    public function testFromSignatureDoesNotMatch()
+    {
+        $exception = SignatureException::fromSignatureDoesNotMatch();
+
+        self::assertInstanceOf(SignatureException::class, $exception);
+        self::assertSame('Signature does not match', $exception->getMessage());
+
+        $this->expectException(SignatureException::class);
+
+        throw $exception;
+    }
 }

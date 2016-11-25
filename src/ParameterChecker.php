@@ -45,7 +45,7 @@ final class ParameterChecker implements CheckerInterface
         }
 
         if ($defaultProperties[$propertyName] !== $signature) {
-            throw new SignatureDoesNotMatchException();
+            throw SignatureException::fromSignatureDoesNotMatch();
         }
     }
 }
