@@ -18,9 +18,9 @@ final class FileContentSignerTest extends PHPUnit_Framework_TestCase
     {
         $signer = new FileContentSigner(new Base64Encoder(), new Md5Hasher());
 
-        self::assertSame('Roave/Signature: YToxOntpOjA7czo1OiI8P3BocCI7fQ==', $signer->sign('<?php'));
-        self::assertSame('Roave/Signature: YToxOntpOjA7czo2OiI8P3BocAoiO30=', $signer->sign('<?php' . "\n"));
-        self::assertSame('Roave/Signature: YToxOntpOjA7czo2OiI8aHRtbD4iO30=', $signer->sign('<html>'));
-        self::assertSame('Roave/Signature: YToxOntpOjA7czoxMDoicGxhaW4gdGV4dCI7fQ==', $signer->sign('plain text'));
+        self::assertSame('Roave/Signature: PD9waHA=', $signer->sign('<?php'));
+        self::assertSame('Roave/Signature: PD9waHAK', $signer->sign('<?php' . "\n"));
+        self::assertSame('Roave/Signature: PGh0bWw+', $signer->sign('<html>'));
+        self::assertSame('Roave/Signature: cGxhaW4gdGV4dA==', $signer->sign('plain text'));
     }
 }

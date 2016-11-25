@@ -6,5 +6,5 @@ namespace Roave\Signature\Encoder;
 
 interface EncoderInterface
 {
-    public function encode(array $parameters): string;
+    public function encode(string $parameters): string;
 }

@@ -9,8 +9,8 @@ final class Md5Hasher implements HasherInterface
     /**
      * {@inheritDoc}
      */
-    public function hash(array $parameters): string
+    public function hash(string $parameters): string
     {
-        return md5(serialize($parameters));
+        return md5($parameters);
     }
 }

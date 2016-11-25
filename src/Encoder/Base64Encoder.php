@@ -9,8 +9,8 @@ final class Base64Encoder implements EncoderInterface
     /**
      * {@inheritDoc}
      */
-    public function encode(array $parameters): string
+    public function encode(string $parameters): string
     {
-        return base64_encode(serialize($parameters));
+        return base64_encode($parameters);
     }
 }

@@ -15,12 +15,7 @@ final class Base64EncoderTest extends \PHPUnit_Framework_TestCase
     {
         $encoder = new Base64Encoder();
 
-        self::assertSame('YTowOnt9', $encoder->encode([]));
-        self::assertSame('YToxOntpOjA7Tjt9', $encoder->encode([null]));
-        self::assertSame('YTozOntpOjA7aToxO2k6MTtpOjI7aToyO2k6Mzt9', $encoder->encode([1, 2, 3]));
-        self::assertSame(
-            'YToxOntzOjY6InBhcmFtcyI7YToyOntzOjM6Im9uZSI7YTowOnt9czozOiJ0d28iO2k6MTIzO319',
-            $encoder->encode(['params' => ['one' => [], 'two' => 123]])
-        );
+        self::assertSame('IA==', $encoder->encode(' '));
+        self::assertSame('PD9waHA=', $encoder->encode('<?php'));
     }
 }

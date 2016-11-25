@@ -6,5 +6,5 @@ namespace Roave\Signature\Hasher;
 
 interface HasherInterface
 {
-    public function hash(array $parameters): string;
+    public function hash(string $parameters): string;
 }

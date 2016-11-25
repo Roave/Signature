@@ -15,9 +15,7 @@ final class Md5HasherTest extends \PHPUnit_Framework_TestCase
     {
         $hasher = new Md5Hasher();
 
-        self::assertSame('40cd750bba9870f18aada2478b24840a', $hasher->hash([]));
-        self::assertSame('38017a839aaeb8ff1a658fce9af6edd3', $hasher->hash([null]));
-        self::assertSame('262bbc0aa0dc62a93e350f1f7df792b9', $hasher->hash([1, 2, 3]));
-        self::assertSame('aa565c66cb423c77379a37dd2d17bb2b', $hasher->hash(['params' => ['one' => [], 'two' => 123]]));
+        self::assertSame('7215ee9c7d9dc229d2921a40e899ec5f', $hasher->hash(' '));
+        self::assertSame('5570a6d194c76efe98e2df6cd99a6283', $hasher->hash('hash it them'));
     }
 }

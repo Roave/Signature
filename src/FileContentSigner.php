@@ -30,6 +30,6 @@ final class FileContentSigner implements SignerInterface
 
     public function sign(string $phpCode): string
     {
-        return 'Roave/Signature: ' . $this->encoder->encode([$phpCode]);
+        return 'Roave/Signature: ' . $this->encoder->encode($phpCode);
     }
 }

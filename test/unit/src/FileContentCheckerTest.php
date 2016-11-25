@@ -54,13 +54,13 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 
         self::assertFileExists($classFilePath);
 
-        $this->encoder->expects(self::once())->method('encode')->with([
+        $this->encoder->expects(self::once())->method('encode')->with(
             str_replace(
                 '/** Roave/Signature: YToxOntpOjA7czoxNDE6Ijw/cGhwCgpuYW1lc3BhY2UgU2lnbmF0dXJlVGVzdEZpeHR1cmU7CgpjbGFzcyBVc2VyQ2xhc3NTaWduZWRCeUZpbGVDb250ZW50CnsKICAgIHB1YmxpYyAkbmFtZTsKCiAgICBwcm90ZWN0ZWQgJHN1cm5hbWU7CgogICAgcHJpdmF0ZSAkYWdlOwp9CiI7fQ== */' . "\n",
                 '',
                 file_get_contents($classFilePath)
             )
-        ]);
+        );
 
         /* @var $reflection \ReflectionClass|\PHPUnit_Framework_MockObject_MockObject */
 
