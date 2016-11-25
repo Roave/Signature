@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Signature\Encoder;
 
-/**
- * @author Jefersson Nathan <malukenho@phpse.net>
- * @license MIT
- */
 final class Base64Encoder implements EncoderInterface
 {
     /**
