@@ -12,7 +12,6 @@ use Signature\Exception\SignatureDoesNotMatchException;
 use Signature\FileContentChecker;
 use Signature\Hasher\HasherInterface;
 use Signature\Hasher\Md5Hasher;
-use SignatureTestFixture\UserClass;
 use SignatureTestFixture\UserClassSignedByFileContent;
 
 /**
@@ -54,19 +53,22 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 
     public function testShouldThrowExceptionInCaseOfInvalidSignature()
     {
-        $classFilePath = __DIR__ . '/../../fixture/UserClass.php';
+        $classFilePath = __DIR__ . '/../../fixture/UserClassSignedByFileContent.php';
 
         self::assertFileExists($classFilePath);
 
-        $this->hasher->expects(self::once())->method('hash')->with([UserClass::class]);
-        $this->encoder->expects(self::once())->method('encode')->with([file_get_contents($classFilePath)]);
+        $this->encoder->expects(self::once())->method('encode')->with([
+            str_replace(
+                '/** Roave/Signature: YToxOntpOjA7czoxNDE6Ijw/cGhwCgpuYW1lc3BhY2UgU2lnbmF0dXJlVGVzdEZpeHR1cmU7CgpjbGFzcyBVc2VyQ2xhc3NTaWduZWRCeUZpbGVDb250ZW50CnsKICAgIHB1YmxpYyAkbmFtZTsKCiAgICBwcm90ZWN0ZWQgJHN1cm5hbWU7CgogICAgcHJpdmF0ZSAkYWdlOwp9CiI7fQ== */' . "\n",
+                '',
+                file_get_contents($classFilePath)
+            )
+        ]);
 
         /* @var $reflection \ReflectionClass|\PHPUnit_Framework_MockObject_MockObject */
         $reflection = $this->createMock(\ReflectionClass::class);
 
-        $reflection->expects(self::once())->method('getName')->willReturn(UserClass::class);
-        $reflection->expects(self::exactly(2))->method('getFileName')->willReturn($classFilePath);
-        $reflection->expects(self::once())->method('getDefaultProperties')->willReturn(['fileContentSignature' => '1']);
+        $reflection->expects(self::exactly(3))->method('getFileName')->willReturn($classFilePath);
 
         $checker = new FileContentChecker($this->encoder, $this->hasher);
 
@@ -81,13 +83,9 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 
         self::assertFileExists($classFilePath);
 
-        $this->hasher->expects(self::once())->method('hash')->with([UserClass::class]);
-        $this->encoder->expects(self::once())->method('encode')->with([file_get_contents($classFilePath)]);
-
         /* @var $reflection \ReflectionClass|\PHPUnit_Framework_MockObject_MockObject */
         $reflection = $this->createMock(\ReflectionClass::class);
 
-        $reflection->expects(self::once())->method('getName')->willReturn(UserClass::class);
         $reflection->expects(self::exactly(2))->method('getFileName')->willReturn($classFilePath);
 
         $checker = new FileContentChecker($this->encoder, $this->hasher);
@@ -99,8 +97,6 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 
     public function testShouldThrowExceptionInCaseOfFileNotLocated()
     {
-        $this->hasher->expects(self::once())->method('hash')->with([\stdClass::class]);
-
         $checker = new FileContentChecker($this->encoder, $this->hasher);
 
         $this->expectException(\RuntimeException::class);

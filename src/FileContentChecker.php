@@ -38,23 +38,38 @@ final class FileContentChecker implements CheckerInterface
      */
     public function check(ReflectionClass $class, array $parameters)
     {
-        $propertyName = 'fileContentSignature' . $this->hasher->hash([$class->getName()]);
-
+        // @todo missing check/exception if file is readable
         if (! $class->getFileName()) {
             // @todo specific exception
             throw new \RuntimeException('File could not be located');
         }
 
-        // @todo missing check/exception if file is readable
+        // @todo refactor the extraction of the signature
+        $fileContent = file_get_contents($class->getFileName());
 
-        $signature         = $this->encoder->encode([file_get_contents($class->getFileName())]);
-        $defaultProperties = $class->getDefaultProperties();
-
-        if (! isset($defaultProperties[$propertyName])) {
+        if (! preg_match('{Roave/Signature: ([a-zA-Z0-9\/=]+)}', $fileContent, $matches)) {
             throw new InvalidSignatureException();
         }
 
-        if ($defaultProperties[$propertyName] !== $signature) {
+        // @todo extract this logic for get rid of signature
+        $codeWithoutSignature = implode(
+            array_filter(
+                array_map(
+                    function (string $line): ?string {
+                        if (! preg_match('{Roave/Signature: (\w)}', $line, $matches)) {
+                            return $line;
+                        }
+
+                        return null;
+                    },
+                    file($class->getFileName())
+                )
+            )
+        );
+
+        $signature = $this->encoder->encode([$codeWithoutSignature]);
+
+        if ($matches[1] !== $signature) {
             throw new SignatureDoesNotMatchException();
         }
     }
