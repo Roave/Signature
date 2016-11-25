@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Signature;
 
 use Signature\Encoder\EncoderInterface;
-use Signature\Exception\SignatureException;
 use Signature\Hasher\HasherInterface;
 
 final class FileContentChecker implements CheckerInterface
@@ -35,7 +34,7 @@ final class FileContentChecker implements CheckerInterface
     public function check(string $phpCode)
     {
         if (! preg_match('{Roave/Signature:\s+([a-zA-Z0-9\/=]+)}', $phpCode, $matches)) {
-            throw SignatureException::fromInvalidSignature();
+            return false;
         }
 
         // @todo extract this logic for get rid of signature
@@ -62,8 +61,6 @@ final class FileContentChecker implements CheckerInterface
 
         $signature = $this->encoder->encode([$codeWithoutSignature]);
 
-        if ($matches[1] !== $signature) {
-            throw SignatureException::fromSignatureDoesNotMatch();
-        }
+        return $matches[1] === $signature;
     }
 }

@@ -7,7 +7,6 @@ namespace SignatureTest;
 use PHPUnit_Framework_TestCase;
 use Signature\Encoder\Base64Encoder;
 use Signature\Encoder\EncoderInterface;
-use Signature\Exception\SignatureException;
 use Signature\FileContentChecker;
 use Signature\Hasher\HasherInterface;
 use Signature\Hasher\Md5Hasher;
@@ -49,7 +48,7 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
         $checker->check(file_get_contents($classFilePath));
     }
 
-    public function testShouldThrowExceptionInCaseOfInvalidSignature()
+    public function testShouldReturnFalseIfSignatureDoesNotMatch()
     {
         $classFilePath = __DIR__ . '/../../fixture/UserClassSignedByFileContent.php';
 
@@ -67,13 +66,10 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 
         $checker = new FileContentChecker($this->encoder, $this->hasher);
 
-        $this->expectException(SignatureException::class);
-        $this->expectExceptionMessage('Signature does not match');
-
-        $checker->check(file_get_contents($classFilePath));
+        self::assertFalse($checker->check(file_get_contents($classFilePath)));
     }
 
-    public function testShouldThrowExceptionInCaseOfSignatureDoesNotMatch()
+    public function testShouldReturnFalseIfClassIsNotSigned()
     {
         $classFilePath = __DIR__ . '/../../fixture/UserClass.php';
 
@@ -81,8 +77,6 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 
         $checker = new FileContentChecker($this->encoder, $this->hasher);
 
-        $this->expectException(SignatureException::class);
-
-        $checker->check(file_get_contents($classFilePath));
+        self::assertFalse($checker->check(file_get_contents($classFilePath)));
     }
 }

@@ -14,9 +14,7 @@ interface CheckerInterface
     /**
      * @param string $phpCode
      *
-     * @throws \Signature\Exception\SignatureException
-     *
-     * @return void
+     * @return bool
      */
     public function check(string $phpCode);
 }
