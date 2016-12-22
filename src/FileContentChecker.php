@@ -37,28 +37,16 @@ final class FileContentChecker implements CheckerInterface
             return false;
         }
 
-        // @todo extract this logic for get rid of signature
-        $codeWithoutSignature = array_reduce(
-            explode(PHP_EOL, $phpCode),
-            function (string $carry = null, string $currentLine = null): string {
+        return $this->encoder->verify($this->stripCodeSignature($phpCode), $matches[1]);
+    }
 
-                // if current line is the signature line, we just ignore it
-                if (preg_match('{Roave/Signature: (\w)}', $currentLine)) {
-                    return $carry;
-                }
-
-                if (null === $carry) {
-                    return $currentLine;
-                }
-
-                if (null !== $currentLine) {
-                    return $carry . PHP_EOL . $currentLine;
-                }
-
-                return $carry;
-            }
-        );
-
-        return $this->encoder->verify($codeWithoutSignature, $matches[1]);
+    /**
+     * @param string $phpCode
+     *
+     * @return string
+     */
+    private function stripCodeSignature(string $phpCode)
+    {
+        return preg_replace('{[\/\*\s]+Roave/Signature:\s+([a-zA-Z0-9\/\*\/ =]+)}', '', $phpCode);
     }
 }
