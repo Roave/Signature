@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Roave\Signature;
 
 use Roave\Signature\Encoder\EncoderInterface;
-use Roave\Signature\Hasher\HasherInterface;
 
 final class FileContentSigner implements SignerInterface
 {
@@ -15,17 +14,11 @@ final class FileContentSigner implements SignerInterface
     private $encoder;
 
     /**
-     * @var HasherInterface
-     */
-    private $hasher;
-
-    /**
      * {@inheritDoc}
      */
-    public function __construct(EncoderInterface $encoder, HasherInterface $hasher)
+    public function __construct(EncoderInterface $encoder)
     {
         $this->encoder = $encoder;
-        $this->hasher  = $hasher;
     }
 
     public function sign(string $phpCode): string

@@ -7,7 +7,6 @@ namespace Roave\SignatureTest;
 use PHPUnit_Framework_TestCase;
 use Roave\Signature\Encoder\Base64Encoder;
 use Roave\Signature\FileContentSigner;
-use Roave\Signature\Hasher\Md5Hasher;
 
 /**
  * @covers \Roave\Signature\FileContentSigner
@@ -16,7 +15,7 @@ final class FileContentSignerTest extends PHPUnit_Framework_TestCase
 {
     public function testSign()
     {
-        $signer = new FileContentSigner(new Base64Encoder(), new Md5Hasher());
+        $signer = new FileContentSigner(new Base64Encoder());
 
         self::assertSame('Roave/Signature: PD9waHA=', $signer->sign('<?php'));
         self::assertSame('Roave/Signature: PD9waHAK', $signer->sign('<?php' . "\n"));

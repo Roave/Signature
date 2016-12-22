@@ -8,8 +8,6 @@ use PHPUnit_Framework_TestCase;
 use Roave\Signature\Encoder\Base64Encoder;
 use Roave\Signature\Encoder\EncoderInterface;
 use Roave\Signature\FileContentChecker;
-use Roave\Signature\Hasher\HasherInterface;
-use Roave\Signature\Hasher\Md5Hasher;
 
 /**
  * @covers \Roave\Signature\FileContentChecker
@@ -22,11 +20,6 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
     private $encoder;
 
     /**
-     * @var HasherInterface|\PHPUnit_Framework_MockObject_MockObject
-     */
-    private $hasher;
-
-    /**
      * {@inheritDoc}
      */
     protected function setUp()
@@ -34,7 +27,6 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->encoder = $this->createMock(EncoderInterface::class);
-        $this->hasher  = $this->createMock(HasherInterface::class);
     }
 
     public function testShouldCheckClassFileContent()
@@ -43,7 +35,7 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 
         self::assertFileExists($classFilePath);
 
-        $checker = new FileContentChecker(new Base64Encoder(), new Md5Hasher());
+        $checker = new FileContentChecker(new Base64Encoder());
 
         $checker->check(file_get_contents($classFilePath));
     }
@@ -67,7 +59,7 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
             $expectedSignature
         );
 
-        $checker = new FileContentChecker($this->encoder, $this->hasher);
+        $checker = new FileContentChecker($this->encoder);
 
         self::assertFalse($checker->check(file_get_contents($classFilePath)));
     }
@@ -78,7 +70,7 @@ final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
 
         self::assertFileExists($classFilePath);
 
-        $checker = new FileContentChecker($this->encoder, $this->hasher);
+        $checker = new FileContentChecker($this->encoder);
 
         self::assertFalse($checker->check(file_get_contents($classFilePath)));
     }
