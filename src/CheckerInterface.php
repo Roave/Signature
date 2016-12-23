@@ -15,5 +15,5 @@ interface CheckerInterface
      *
      * @return bool
      */
-    public function check(string $phpCode);
+    public function check(string $phpCode): bool;
 }

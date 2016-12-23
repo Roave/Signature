@@ -24,7 +24,7 @@ final class FileContentChecker implements CheckerInterface
     /**
      * {@inheritDoc}
      */
-    public function check(string $phpCode)
+    public function check(string $phpCode): bool
     {
         if (! preg_match('{Roave/Signature:\s+([a-zA-Z0-9\/=]+)}', $phpCode, $matches)) {
             return false;
@@ -38,7 +38,7 @@ final class FileContentChecker implements CheckerInterface
      *
      * @return string
      */
-    private function stripCodeSignature(string $phpCode)
+    private function stripCodeSignature(string $phpCode): string
     {
         return preg_replace('{[\/\*\s]+Roave/Signature:\s+([a-zA-Z0-9\/\*\/ =]+)}', '', $phpCode);
     }
