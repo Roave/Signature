@@ -1,5 +1,39 @@
-# Signature
+# :closed_lock_with_key: Roave\Signature 
 
-Sign and verify classes are the same or unchanged.
+Sign and validate signed files made easy.
 
-Note: this is not a cryptographic signing library.
+**Note: this is not a cryptographic signing library.**
+
+### Installation
+
+The suggested installation method is via [composer](https://getcomposer.org/):
+
+```bash
+$ composer require roave/signature
+```
+
+### Use example
+
+#### Signing a file
+
+```php
+// Creating a signer 
+$signer = new \Roave\Signatur\FileContentSigner(
+    new \Roave\Signature\Encoder\Base64Encoder()
+);
+
+// It'll give you a signature to the provided code content
+$signer->sign(file_get_contents('/var/tmp/file.php'));
+```
+
+#### Validation a signed file
+
+```php
+// Creating a signer checker
+$signer = new \Roave\Signatur\FileContentChecker(
+    new \Roave\Signature\Encoder\Base64Encoder()
+);
+
+// It'll validate the signature on file content
+$signer->check(file_get_contents('/var/tmp/signed-file.php'));
+```
