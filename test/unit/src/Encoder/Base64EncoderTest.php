@@ -18,4 +18,10 @@ final class Base64EncoderTest extends \PHPUnit_Framework_TestCase
         self::assertSame('IA==', $encoder->encode(' '));
         self::assertSame('PD9waHA=', $encoder->encode('<?php'));
     }
+
+    public function testVerify()
+    {
+        $value = uniqid('values', true);
+        self::assertTrue((new Base64Encoder())->verify($value, base64_encode($value)));
+    }
 }
