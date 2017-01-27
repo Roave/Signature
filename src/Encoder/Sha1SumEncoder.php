@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Roave\Signature\Encoder;
 
-final class ShaSumEncoder implements EncoderInterface
+final class Sha1SumEncoder implements EncoderInterface
 {
     /**
      * {@inheritDoc}
