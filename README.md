@@ -17,20 +17,20 @@ $ composer require roave/signature
 #### Signing a file
 
 ```php
-// Creating a signer 
-$signer = new \Roave\Signatur\FileContentSigner(
+// Creating a signer
+$signer = new \Roave\Signature\FileContentSigner(
     new \Roave\Signature\Encoder\Base64Encoder()
 );
 
 // It'll give you a signature to the provided code content
-$signer->sign(file_get_contents('/var/tmp/file.php'));
+$signature = $signer->sign(file_get_contents('/var/tmp/file.php'));
 ```
 
 #### Validation a signed file
 
 ```php
 // Creating a signer checker
-$signer = new \Roave\Signatur\FileContentChecker(
+$signer = new \Roave\Signature\FileContentChecker(
     new \Roave\Signature\Encoder\Base64Encoder()
 );
 
