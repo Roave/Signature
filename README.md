@@ -12,26 +12,26 @@ The suggested installation method is via [composer](https://getcomposer.org/):
 $ composer require roave/signature
 ```
 
-### Use example
+### Usage examples
 
 #### Signing a file
 
 ```php
 // Creating a signer
 $signer = new \Roave\Signature\FileContentSigner(
-    new \Roave\Signature\Encoder\Base64Encoder()
+    new \Roave\Signature\Encoder\Sha1SumEncoder()
 );
 
 // It'll give you a signature to the provided code content
 $signature = $signer->sign(file_get_contents('/var/tmp/file.php'));
 ```
 
-#### Validation a signed file
+#### Validating a signed file
 
 ```php
 // Creating a signer checker
 $signer = new \Roave\Signature\FileContentChecker(
-    new \Roave\Signature\Encoder\Base64Encoder()
+    new \Roave\Signature\Encoder\Sha1SumEncoder()
 );
 
 // It'll validate the signature on file content
