@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Roave\SignatureTest;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Roave\Signature\Encoder\Base64Encoder;
 use Roave\Signature\FileContentSigner;
 
 /**
  * @covers \Roave\Signature\FileContentSigner
  */
-final class FileContentSignerTest extends PHPUnit_Framework_TestCase
+final class FileContentSignerTest extends TestCase
 {
     public function testSign()
     {

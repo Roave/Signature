@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Roave\SignatureTest\Encoder;
 
+use PHPUnit\Framework\TestCase;
 use Roave\Signature\Encoder\HmacEncoder;
 
 /**
  * @covers \Roave\Signature\Encoder\HmacEncoder
  */
-final class HmacEncoderTest extends \PHPUnit_Framework_TestCase
+final class HmacEncoderTest extends TestCase
 {
     public function testEncode()
     {
