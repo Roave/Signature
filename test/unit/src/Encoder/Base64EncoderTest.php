@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Roave\SignatureTest\Encoder;
 
+use PHPUnit\Framework\TestCase;
 use Roave\Signature\Encoder\Base64Encoder;
 
 /**
  * @covers \Roave\Signature\Encoder\Base64Encoder
  */
-final class Base64EncoderTest extends \PHPUnit_Framework_TestCase
+final class Base64EncoderTest extends TestCase
 {
     public function testEncode()
     {

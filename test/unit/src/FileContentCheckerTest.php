@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Roave\SignatureTest;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Roave\Signature\Encoder\Base64Encoder;
 use Roave\Signature\Encoder\EncoderInterface;
 use Roave\Signature\FileContentChecker;
@@ -12,10 +12,10 @@ use Roave\Signature\FileContentChecker;
 /**
  * @covers \Roave\Signature\FileContentChecker
  */
-final class FileContentCheckerTest extends PHPUnit_Framework_TestCase
+final class FileContentCheckerTest extends TestCase
 {
     /**
-     * @var EncoderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var EncoderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $encoder;
 
