@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Roave\SignatureTest\Encoder;
 
+use PHPUnit\Framework\TestCase;
 use Roave\Signature\Encoder\Sha1SumEncoder;
 
 /**
  * @covers \Roave\Signature\Encoder\Sha1SumEncoder
  */
-final class Sha1SumEncoderTest extends \PHPUnit_Framework_TestCase
+final class Sha1SumEncoderTest extends TestCase
 {
     public function testEncode()
     {
