@@ -13,13 +13,26 @@ use Roave\Signature\FileContentSigner;
  */
 final class FileContentSignerTest extends TestCase
 {
-    public function testSign()
+    /**
+     * @return string[][]
+     */
+    public function signProvider(): array
+    {
+        return [
+            ['Roave/Signature: PD9waHA=', '<?php'],
+            ['Roave/Signature: PD9waHAK', '<?php' . "\n"],
+            ['Roave/Signature: PGh0bWw+', '<html>'],
+            ['Roave/Signature: cGxhaW4gdGV4dA==', 'plain text'],
+        ];
+    }
+
+    /**
+     * @dataProvider signProvider
+     */
+    public function testSign(string $expected, string $inputString)
     {
         $signer = new FileContentSigner(new Base64Encoder());
 
-        self::assertSame('Roave/Signature: PD9waHA=', $signer->sign('<?php'));
-        self::assertSame('Roave/Signature: PD9waHAK', $signer->sign('<?php' . "\n"));
-        self::assertSame('Roave/Signature: PGh0bWw+', $signer->sign('<html>'));
-        self::assertSame('Roave/Signature: cGxhaW4gdGV4dA==', $signer->sign('plain text'));
+        self::assertSame($expected, $signer->sign($inputString));
     }
 }
