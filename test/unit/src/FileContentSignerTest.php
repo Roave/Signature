@@ -13,7 +13,10 @@ use Roave\Signature\FileContentSigner;
  */
 final class FileContentSignerTest extends TestCase
 {
-    public function signProvider()
+    /**
+     * @return string[][]
+     */
+    public function signProvider(): array
     {
         return [
             ['Roave/Signature: PD9waHA=', '<?php'],
@@ -26,7 +29,7 @@ final class FileContentSignerTest extends TestCase
     /**
      * @dataProvider signProvider
      */
-    public function testSign($expected, $inputString)
+    public function testSign(string $expected, string $inputString)
     {
         $signer = new FileContentSigner(new Base64Encoder());
 
