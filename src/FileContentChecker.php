@@ -11,7 +11,8 @@ use function preg_replace;
 
 final class FileContentChecker implements CheckerInterface
 {
-    private EncoderInterface $encoder;
+    /** @var EncoderInterface */
+    private $encoder;
 
     /**
      * {@inheritDoc}

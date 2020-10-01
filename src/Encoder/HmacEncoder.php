@@ -9,7 +9,8 @@ use function hash_hmac;
 
 final class HmacEncoder implements EncoderInterface
 {
-    private string $hmacKey;
+    /** @var string */
+    private $hmacKey;
 
     public function __construct(string $hmacKey)
     {
