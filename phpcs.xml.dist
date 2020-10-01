@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<ruleset
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd"
+    name="RoaveSignature"
+>
+    <arg name="basepath" value="."/>
+    <arg name="extensions" value="php"/>
+    <arg name="parallel" value="80"/>
+    <arg name="colors"/>
+
+    <!-- Ignore warnings and show progress of the run -->
+    <arg value="np"/>
+
+    <file>./src</file>
+    <file>./test/unit</file>
+
+    <rule ref="Doctrine">
+        <exclude name="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming.SuperfluousSuffix"/>
+
+        <!-- Only for php7.3 support for now - to be removed once we drop php7.3 support -->
+        <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint" />
+    </rule>
+</ruleset>

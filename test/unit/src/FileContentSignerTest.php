@@ -29,7 +29,7 @@ final class FileContentSignerTest extends TestCase
     /**
      * @dataProvider signProvider
      */
-    public function testSign(string $expected, string $inputString) : void
+    public function testSign(string $expected, string $inputString): void
     {
         $signer = new FileContentSigner(new Base64Encoder());
 
