@@ -10,15 +10,15 @@ use Roave\Signature\Encoder\Base64Encoder;
 use Roave\Signature\Encoder\EncoderInterface;
 use Roave\Signature\FileContentChecker;
 
+use function file_get_contents;
+use function str_replace;
+
 /** @covers \Roave\Signature\FileContentChecker */
 final class FileContentCheckerTest extends TestCase
 {
     /** @var EncoderInterface&MockObject */
     private $encoder;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         parent::setUp();

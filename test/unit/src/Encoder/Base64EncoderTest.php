@@ -7,6 +7,9 @@ namespace Roave\SignatureTest\Encoder;
 use PHPUnit\Framework\TestCase;
 use Roave\Signature\Encoder\Base64Encoder;
 
+use function base64_encode;
+use function uniqid;
+
 /**
  * @covers \Roave\Signature\Encoder\Base64Encoder
  */

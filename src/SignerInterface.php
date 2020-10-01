@@ -6,5 +6,5 @@ namespace Roave\Signature;
 
 interface SignerInterface
 {
-    public function sign(string $phpCode) : string;
+    public function sign(string $phpCode): string;
 }

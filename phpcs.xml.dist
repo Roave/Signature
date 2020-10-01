@@ -16,5 +16,6 @@
     <file>./test/unit</file>
 
     <rule ref="Doctrine">
+        <exclude name="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming.SuperfluousSuffix"/>
     </rule>
 </ruleset>

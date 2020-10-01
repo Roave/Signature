@@ -7,6 +7,9 @@ namespace Roave\SignatureTest\Encoder;
 use PHPUnit\Framework\TestCase;
 use Roave\Signature\Encoder\Sha1SumEncoder;
 
+use function sha1;
+use function uniqid;
+
 /**
  * @covers \Roave\Signature\Encoder\Sha1SumEncoder
  */
