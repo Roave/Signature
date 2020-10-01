@@ -12,7 +12,7 @@ use Roave\Signature\Encoder\Base64Encoder;
  */
 final class Base64EncoderTest extends TestCase
 {
-    public function testEncode()
+    public function testEncode(): void
     {
         $encoder = new Base64Encoder();
 
@@ -20,7 +20,7 @@ final class Base64EncoderTest extends TestCase
         self::assertSame('PD9waHA=', $encoder->encode('<?php'));
     }
 
-    public function testVerify()
+    public function testVerify(): void
     {
         $value = uniqid('values', true);
         self::assertTrue((new Base64Encoder())->verify($value, base64_encode($value)));

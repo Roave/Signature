@@ -12,7 +12,7 @@ use Roave\Signature\Encoder\HmacEncoder;
  */
 final class HmacEncoderTest extends TestCase
 {
-    public function testEncode()
+    public function testEncode(): void
     {
         $hmacKey = random_bytes(64);
         $value = uniqid('values', true);
@@ -22,7 +22,7 @@ final class HmacEncoderTest extends TestCase
         );
     }
 
-    public function testVerify()
+    public function testVerify(): void
     {
         $hmacKey = random_bytes(64);
         $value = uniqid('values', true);
