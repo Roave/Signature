@@ -8,9 +8,7 @@ use Roave\Signature\Encoder\EncoderInterface;
 
 final class FileContentSigner implements SignerInterface
 {
-    /**
-     * @var EncoderInterface
-     */
+    /** @var EncoderInterface */
     private $encoder;
 
     /**
