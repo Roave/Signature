@@ -17,8 +17,5 @@
 
     <rule ref="Doctrine">
         <exclude name="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming.SuperfluousSuffix"/>
-
-        <!-- Only for php7.3 support for now - to be removed once we drop php7.3 support -->
-        <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint" />
     </rule>
 </ruleset>

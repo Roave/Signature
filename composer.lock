@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "545e9f5619d1ff73e2df955e52e89d68",
+    "content-hash": "32e3f6c4fad2ae9d0cf49a510829a4c9",
     "packages": [],
     "packages-dev": [
         {
@@ -1736,12 +1736,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "ca932dd40f0ead8c3d13db98fbc77ed3385b1878"
+                "reference": "8b19fa922d8bfefe6f4b3d7b9590662e5451a69a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/ca932dd40f0ead8c3d13db98fbc77ed3385b1878",
-                "reference": "ca932dd40f0ead8c3d13db98fbc77ed3385b1878",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/8b19fa922d8bfefe6f4b3d7b9590662e5451a69a",
+                "reference": "8b19fa922d8bfefe6f4b3d7b9590662e5451a69a",
                 "shasum": ""
             },
             "require": {
@@ -1806,7 +1806,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-01T04:02:44+00:00"
+            "time": "2020-10-01T08:28:18+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -4860,7 +4860,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2 || ^7.3 || ^7.4"
+        "php": "7.4.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
