@@ -6,5 +6,10 @@ namespace Roave\Signature;
 
 interface CheckerInterface
 {
+    /**
+     * @param string $phpCode
+     *
+     * @return bool
+     */
     public function check(string $phpCode): bool;
 }

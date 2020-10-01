@@ -4,29 +4,32 @@ declare(strict_types=1);
 
 namespace Roave\SignatureTest;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Roave\Signature\Encoder\Base64Encoder;
 use Roave\Signature\Encoder\EncoderInterface;
 use Roave\Signature\FileContentChecker;
 
-use function file_get_contents;
-use function str_replace;
-
-/** @covers \Roave\Signature\FileContentChecker */
+/**
+ * @covers \Roave\Signature\FileContentChecker
+ */
 final class FileContentCheckerTest extends TestCase
 {
-    /** @var EncoderInterface&MockObject */
+    /**
+     * @var EncoderInterface|\PHPUnit\Framework\MockObject\MockObject
+     */
     private $encoder;
 
-    protected function setUp(): void
+    /**
+     * {@inheritDoc}
+     */
+    protected function setUp()
     {
         parent::setUp();
 
         $this->encoder = $this->createMock(EncoderInterface::class);
     }
 
-    public function testShouldCheckClassFileContent(): void
+    public function testShouldCheckClassFileContent()
     {
         $classFilePath = __DIR__ . '/../../fixture/UserClassSignedByFileContent.php';
 
@@ -37,7 +40,7 @@ final class FileContentCheckerTest extends TestCase
         $checker->check(file_get_contents($classFilePath));
     }
 
-    public function testShouldReturnFalseIfSignatureDoesNotMatch(): void
+    public function testShouldReturnFalseIfSignatureDoesNotMatch()
     {
         $classFilePath = __DIR__ . '/../../fixture/UserClassSignedByFileContent.php';
 
@@ -61,7 +64,7 @@ final class FileContentCheckerTest extends TestCase
         self::assertFalse($checker->check(file_get_contents($classFilePath)));
     }
 
-    public function testShouldReturnFalseIfClassIsNotSigned(): void
+    public function testShouldReturnFalseIfClassIsNotSigned()
     {
         $classFilePath = __DIR__ . '/../../fixture/UserClass.php';
 

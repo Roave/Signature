@@ -6,12 +6,11 @@ namespace Roave\Signature;
 
 use Roave\Signature\Encoder\EncoderInterface;
 
-use function preg_match;
-use function preg_replace;
-
 final class FileContentChecker implements CheckerInterface
 {
-    /** @var EncoderInterface */
+    /**
+     * @var EncoderInterface
+     */
     private $encoder;
 
     /**
@@ -22,6 +21,9 @@ final class FileContentChecker implements CheckerInterface
         $this->encoder = $encoder;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function check(string $phpCode): bool
     {
         if (! preg_match('{Roave/Signature:\s+([a-zA-Z0-9\/=]+)}', $phpCode, $matches)) {
@@ -31,6 +33,11 @@ final class FileContentChecker implements CheckerInterface
         return $this->encoder->verify($this->stripCodeSignature($phpCode), $matches[1]);
     }
 
+    /**
+     * @param string $phpCode
+     *
+     * @return string
+     */
     private function stripCodeSignature(string $phpCode): string
     {
         return preg_replace('{[\/\*\s]+Roave/Signature:\s+([a-zA-Z0-9\/\*\/ =]+)}', '', $phpCode);
