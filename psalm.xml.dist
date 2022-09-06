@@ -3,8 +3,8 @@
     xmlns="https://getpsalm.org/schema/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
-    totallyTyped="true"
-    allowPhpStormGenerics="true"
+    errorLevel="1"
+    findUnusedPsalmSuppress="true"
 >
     <projectFiles>
         <directory name="src"/>
