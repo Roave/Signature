@@ -39,7 +39,7 @@ jobs:
           restore-keys: "php-${{ matrix.php-version }}"
 
       - name: "Install dependencies"
-        run: "composer install --no-interaction --no-progress --no-suggest"
+        run: "composer install --no-interaction --no-progress"
 
       - name: "Coding Standard"
         run: "vendor/bin/phpcs -q --report=checkstyle | cs2pr"
