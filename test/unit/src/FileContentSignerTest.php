@@ -8,14 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Roave\Signature\Encoder\Base64Encoder;
 use Roave\Signature\FileContentSigner;
 
-/**
- * @covers \Roave\Signature\FileContentSigner
- */
+/** @covers \Roave\Signature\FileContentSigner */
 final class FileContentSignerTest extends TestCase
 {
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function signProvider(): array
     {
         return [
@@ -26,9 +22,7 @@ final class FileContentSignerTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider signProvider
-     */
+    /** @dataProvider signProvider */
     public function testSign(string $expected, string $inputString): void
     {
         $signer = new FileContentSigner(new Base64Encoder());

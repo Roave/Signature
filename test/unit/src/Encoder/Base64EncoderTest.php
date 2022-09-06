@@ -10,9 +10,7 @@ use Roave\Signature\Encoder\Base64Encoder;
 use function base64_encode;
 use function uniqid;
 
-/**
- * @covers \Roave\Signature\Encoder\Base64Encoder
- */
+/** @covers \Roave\Signature\Encoder\Base64Encoder */
 final class Base64EncoderTest extends TestCase
 {
     public function testEncode(): void

@@ -10,9 +10,7 @@ use Roave\Signature\Encoder\Sha1SumEncoder;
 use function sha1;
 use function uniqid;
 
-/**
- * @covers \Roave\Signature\Encoder\Sha1SumEncoder
- */
+/** @covers \Roave\Signature\Encoder\Sha1SumEncoder */
 final class Sha1SumEncoderTest extends TestCase
 {
     public function testEncode(): void
