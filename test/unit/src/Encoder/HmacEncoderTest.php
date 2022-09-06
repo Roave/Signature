@@ -11,9 +11,7 @@ use function hash_hmac;
 use function random_bytes;
 use function uniqid;
 
-/**
- * @covers \Roave\Signature\Encoder\HmacEncoder
- */
+/** @covers \Roave\Signature\Encoder\HmacEncoder */
 final class HmacEncoderTest extends TestCase
 {
     public function testEncode(): void
@@ -22,7 +20,7 @@ final class HmacEncoderTest extends TestCase
         $value   = uniqid('values', true);
         self::assertSame(
             hash_hmac('sha256', $value, $hmacKey),
-            (new HmacEncoder($hmacKey))->encode($value)
+            (new HmacEncoder($hmacKey))->encode($value),
         );
     }
 

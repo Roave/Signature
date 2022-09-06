@@ -51,9 +51,9 @@ final class FileContentCheckerTest extends TestCase
             str_replace(
                 '/** Roave/Signature: ' . $expectedSignature . ' */' . "\n",
                 '',
-                file_get_contents($classFilePath)
+                file_get_contents($classFilePath),
             ),
-            $expectedSignature
+            $expectedSignature,
         );
 
         $checker = new FileContentChecker($this->encoder);
