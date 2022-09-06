@@ -29,9 +29,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v2"
-        with:
-          fetch-depth: 0
+        uses: "actions/checkout@v3"
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
@@ -39,28 +37,11 @@ jobs:
           coverage: "pcov"
           php-version: "${{ matrix.php-version }}"
           ini-values: memory_limit=-1
-          tools: composer:v2, cs2pr
 
-      - name: "Cache dependencies"
-        uses: "actions/cache@v2"
+      - name: "Install dependencies"
+        uses: "ramsey/composer-install@v2"
         with:
-          path: |
-            ~/.composer/cache
-            vendor
-          key: "php-${{ matrix.php-version }}-${{ matrix.dependencies }}"
-          restore-keys: "php-${{ matrix.php-version }}-${{ matrix.dependencies }}"
-
-      - name: "Install lowest dependencies"
-        if: ${{ matrix.dependencies == 'lowest' }}
-        run: "composer update --prefer-lowest --no-interaction --no-progress"
-
-      - name: "Install highest dependencies"
-        if: ${{ matrix.dependencies == 'highest' }}
-        run: "composer update --no-interaction --no-progress"
-
-      - name: "Install locked dependencies"
-        if: ${{ matrix.dependencies == 'locked' }}
-        run: "composer install --no-interaction --no-progress"
+          dependency-versions: "${{ matrix.dependencies }}"
 
       - name: "Tests"
         run: "vendor/bin/phpunit"
@@ -72,34 +53,28 @@ jobs:
 
     strategy:
       matrix:
+        dependencies:
+          - "locked"
         php-version:
-          - "8.0"
+          - "8.1"
         operating-system:
           - "ubuntu-latest"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v2"
+        uses: "actions/checkout@v3"
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          coverage: "pcov"
+          coverage: "none"
           php-version: "${{ matrix.php-version }}"
           ini-values: memory_limit=-1
-          tools: composer:v2, cs2pr
-
-      - name: "Cache dependencies"
-        uses: "actions/cache@v2"
-        with:
-          path: |
-            ~/.composer/cache
-            vendor
-          key: "php-${{ matrix.php-version }}"
-          restore-keys: "php-${{ matrix.php-version }}"
 
       - name: "Install dependencies"
-        run: "composer install --no-interaction --no-progress"
+        uses: "ramsey/composer-install@v2"
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
 
       - name: "psalm"
         run: "vendor/bin/psalm  --output-format=github --shepherd --stats"
@@ -111,36 +86,28 @@ jobs:
 
     strategy:
       matrix:
+        dependencies:
+          - "locked"
         php-version:
-          - "8.0"
+          - "8.1"
         operating-system:
           - "ubuntu-latest"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v2"
-        with:
-          fetch-depth: 0
+        uses: "actions/checkout@v3"
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          coverage: "pcov"
+          coverage: "xdebug"
           php-version: "${{ matrix.php-version }}"
-          ini-values: memory_limit=-1
-          tools: composer:v2, cs2pr
-
-      - name: "Cache dependencies"
-        uses: "actions/cache@v2"
-        with:
-          path: |
-            ~/.composer/cache
-            vendor
-          key: "php-${{ matrix.php-version }}"
-          restore-keys: "php-${{ matrix.php-version }}"
+          ini-values: memory_limit=-1, zend.assertions=1
 
       - name: "Install dependencies"
-        run: "composer install --no-interaction --no-progress"
+        uses: "ramsey/composer-install@v2"
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
 
       - name: "Infection"
         run: "vendor/bin/infection"
@@ -152,34 +119,28 @@ jobs:
 
     strategy:
       matrix:
+        dependencies:
+          - "locked"
         php-version:
-          - "8.0"
+          - "8.1"
         operating-system:
           - "ubuntu-latest"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v2"
+        uses: "actions/checkout@v3"
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          coverage: "pcov"
+          coverage: "none"
           php-version: "${{ matrix.php-version }}"
           ini-values: memory_limit=-1
-          tools: composer:v2, cs2pr
-
-      - name: "Cache dependencies"
-        uses: "actions/cache@v2"
-        with:
-          path: |
-            ~/.composer/cache
-            vendor
-          key: "php-${{ matrix.php-version }}"
-          restore-keys: "php-${{ matrix.php-version }}"
 
       - name: "Install dependencies"
-        run: "composer install --no-interaction --no-progress"
+        uses: "ramsey/composer-install@v2"
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
 
       - name: "Coding Standard"
-        run: "vendor/bin/phpcs -q --report=checkstyle | cs2pr"
+        run: "vendor/bin/phpcs"
