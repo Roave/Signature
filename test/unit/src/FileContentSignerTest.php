@@ -11,8 +11,8 @@ use Roave\Signature\FileContentSigner;
 /** @covers \Roave\Signature\FileContentSigner */
 final class FileContentSignerTest extends TestCase
 {
-    /** @return string[][] */
-    public function signProvider(): array
+    /** @return non-empty-list<array{non-empty-string, non-empty-string}> */
+    public static function signProvider(): array
     {
         return [
             ['Roave/Signature: PD9waHA=', '<?php'],
