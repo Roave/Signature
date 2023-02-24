@@ -9,7 +9,7 @@
         "phpunit/phpunit": "^9.6.3",
         "infection/infection": "^0.26.19",
         "doctrine/coding-standard": "^11.1.0",
-        "vimeo/psalm": "^5.7.5"
+        "vimeo/psalm": "^5.7.6"
     },
     "autoload": {
         "psr-4": {
