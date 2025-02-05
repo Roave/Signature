@@ -6,6 +6,8 @@ namespace Roave\Signature;
 
 use Roave\Signature\Encoder\EncoderInterface;
 
+use function assert;
+use function is_string;
 use function preg_match;
 use function preg_replace;
 
@@ -32,6 +34,10 @@ final class FileContentChecker implements CheckerInterface
 
     private function stripCodeSignature(string $phpCode): string
     {
-        return preg_replace('{[\/\*\s]+Roave/Signature:\s+([a-zA-Z0-9\/\*\/ =]+)}', '', $phpCode);
+        $replaced = preg_replace('{[\/\*\s]+Roave/Signature:\s+([a-zA-Z0-9\/\*\/ =]+)}', '', $phpCode);
+
+        assert(is_string($replaced));
+
+        return $replaced;
     }
 }

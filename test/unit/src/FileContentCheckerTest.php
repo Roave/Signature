@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace Roave\SignatureTest;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Roave\Signature\Encoder\Base64Encoder;
 use Roave\Signature\Encoder\EncoderInterface;
 use Roave\Signature\FileContentChecker;
 
+use function assert;
 use function file_get_contents;
+use function is_string;
 use function str_replace;
 
-/** @covers \Roave\Signature\FileContentChecker */
+#[CoversClass(FileContentChecker::class)]
 final class FileContentCheckerTest extends TestCase
 {
     /** @var EncoderInterface&MockObject */
@@ -34,7 +37,7 @@ final class FileContentCheckerTest extends TestCase
 
         $checker = new FileContentChecker(new Base64Encoder());
 
-        $checker->check(file_get_contents($classFilePath));
+        $checker->check(self::readFile($classFilePath));
     }
 
     public function testShouldReturnFalseIfSignatureDoesNotMatch(): void
@@ -51,14 +54,14 @@ final class FileContentCheckerTest extends TestCase
             str_replace(
                 '/** Roave/Signature: ' . $expectedSignature . ' */' . "\n",
                 '',
-                file_get_contents($classFilePath),
+                self::readFile($classFilePath),
             ),
             $expectedSignature,
         );
 
         $checker = new FileContentChecker($this->encoder);
 
-        self::assertFalse($checker->check(file_get_contents($classFilePath)));
+        self::assertFalse($checker->check(self::readFile($classFilePath)));
     }
 
     public function testShouldReturnFalseIfClassIsNotSigned(): void
@@ -69,6 +72,15 @@ final class FileContentCheckerTest extends TestCase
 
         $checker = new FileContentChecker($this->encoder);
 
-        self::assertFalse($checker->check(file_get_contents($classFilePath)));
+        self::assertFalse($checker->check(self::readFile($classFilePath)));
+    }
+
+    private static function readFile(string $path): string
+    {
+        $contents = file_get_contents($path);
+
+        assert(is_string($contents));
+
+        return $contents;
     }
 }

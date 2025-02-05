@@ -3,16 +3,25 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     bootstrap="vendor/autoload.php"
     colors="true"
-    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+    columns="max"
+    beStrictAboutChangesToGlobalState="true"
+    beStrictAboutOutputDuringTests="true"
+    failOnEmptyTestSuite="true"
+    failOnDeprecation="true"
+    failOnWarning="true"
+    failOnPhpunitDeprecation="true"
+    failOnNotice="true"
 >
     <testsuites>
         <testsuite name="unit">
             <directory>./test/unit</directory>
         </testsuite>
     </testsuites>
-    <coverage processUncoveredFiles="true">
+    
+    <source>
         <include>
-            <directory suffix=".php">./src</directory>
+            <directory>src</directory>
         </include>
-    </coverage>
+    </source>
 </phpunit>

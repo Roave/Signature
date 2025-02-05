@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Roave\SignatureTest\Encoder;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Roave\Signature\Encoder\Base64Encoder;
 
 use function base64_encode;
 use function uniqid;
 
-/** @covers \Roave\Signature\Encoder\Base64Encoder */
+#[CoversClass(Base64Encoder::class)]
 final class Base64EncoderTest extends TestCase
 {
     public function testEncode(): void

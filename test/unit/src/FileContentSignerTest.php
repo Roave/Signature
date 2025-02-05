@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace Roave\SignatureTest;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Roave\Signature\Encoder\Base64Encoder;
 use Roave\Signature\FileContentSigner;
 
-/** @covers \Roave\Signature\FileContentSigner */
+#[CoversClass(FileContentSigner::class)]
 final class FileContentSignerTest extends TestCase
 {
-    /** @return string[][] */
-    public function signProvider(): array
+    /** @return non-empty-list<list{non-empty-string, non-empty-string}> */
+    public static function signProvider(): array
     {
         return [
             ['Roave/Signature: PD9waHA=', '<?php'],
@@ -23,6 +25,7 @@ final class FileContentSignerTest extends TestCase
     }
 
     /** @dataProvider signProvider */
+    #[DataProvider('signProvider')]
     public function testSign(string $expected, string $inputString): void
     {
         $signer = new FileContentSigner(new Base64Encoder());

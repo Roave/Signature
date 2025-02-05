@@ -4,7 +4,7 @@ Sign and validate signed files made easy.
 
 **Note: this is not a cryptographic signing library.**
 
-### Installation
+## Installation
 
 The suggested installation method is via [composer](https://getcomposer.org/):
 
@@ -12,9 +12,9 @@ The suggested installation method is via [composer](https://getcomposer.org/):
 $ composer require roave/signature
 ```
 
-### Usage examples
+## Usage examples
 
-#### Signing a file
+### Signing a file
 
 ```php
 // Creating a signer
@@ -26,7 +26,7 @@ $signer = new \Roave\Signature\FileContentSigner(
 $signature = $signer->sign(file_get_contents('/var/tmp/file.php'));
 ```
 
-#### Validating a signed file
+### Validating a signed file
 
 ```php
 // Creating a signer checker
