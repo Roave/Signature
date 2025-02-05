@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Roave\SignatureTest\Encoder;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Roave\Signature\Encoder\HmacEncoder;
 
@@ -11,7 +12,7 @@ use function hash_hmac;
 use function random_bytes;
 use function uniqid;
 
-/** @covers \Roave\Signature\Encoder\HmacEncoder */
+#[CoversClass(HmacEncoder::class)]
 final class HmacEncoderTest extends TestCase
 {
     public function testEncode(): void
