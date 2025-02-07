@@ -4898,12 +4898,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/slevomat/coding-standard.git",
-                "reference": "a7b07d4c21ed3cb15c1e8c137b504fdb8f863ab7"
+                "reference": "ca4c747abf6c11b710e7fe5c4dc0a8797f7c90d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/a7b07d4c21ed3cb15c1e8c137b504fdb8f863ab7",
-                "reference": "a7b07d4c21ed3cb15c1e8c137b504fdb8f863ab7",
+                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/ca4c747abf6c11b710e7fe5c4dc0a8797f7c90d8",
+                "reference": "ca4c747abf6c11b710e7fe5c4dc0a8797f7c90d8",
                 "shasum": ""
             },
             "require": {
@@ -4956,7 +4956,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-02T13:31:06+00:00"
+            "time": "2025-02-06T07:16:44+00:00"
         },
         {
             "name": "spatie/array-to-xml",
